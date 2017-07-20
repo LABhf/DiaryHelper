@@ -20,8 +20,9 @@ def mainbody():
     #for a in dict:
     #    print(a)
 
-    #q={}
-    q={'janta': '21', 'almoco': 14, 'geral': '22'}
+    q={}
+    #for debug >
+    #q={'janta': '21', 'almoco': 14, 'geral': '22'}      
     x=55
 
 
