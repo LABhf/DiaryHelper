@@ -21,7 +21,7 @@ def mainbody():
     print("[1] ADD QUESTIONS")
     print("[2] REMOVE QUESTIONS")
     print("[3] UPDATE CONF. FILE")
-                
+
     print("---")
 
 
