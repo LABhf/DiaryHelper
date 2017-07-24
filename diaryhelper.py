@@ -95,7 +95,8 @@ def mainbody():
             #UPDATE
 
 
-
+            #esse jeito é um pouco mais simples pra passar pro data.csv, mas a sintaxe é bem estranha pra transformar o dado no
+            # bgprocess, que é o mesmo arquivo que o ,reader debug, ...
             def w(q):
                 with open("data.csv", "w") as f:
                     #f.write(str(print(a, localq[a])))
