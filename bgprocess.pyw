@@ -1,50 +1,31 @@
-#this should run on background after GUI passed de info to data.csv file
 
-import os
-ll=[]
+# Pulls data out of data.csv
 def r():
-    with open("data.csv", "r") as f:
+    with open("data.csv", "r") as data:
         # f.write(str(print(a, localq[a])))
-        for a in f:
-            global rr
-            rr = a
+        for i in data:
+            global strv
+            strv = i
+
 r()
-strings=""
 
-ll=[]
-for item in rr:
-    if item != ",":
-        strings=strings+item
-
-    else:
-        ll.append(strings)
-        strings=""
-
-print(ll)
-
-i=-1
-j=-1
-numbers=[]
-names=[]
-for a in ll:
-
+# filters the string from r() to a dict
+def strfilter(a):
+    names = []
+    trigger = []
+    a = a.split(",")
     for i in a:
-        j=j+1
+        i = i.split(":")
+        for index, z in enumerate(i):
+            # print(index, z)
+            if index == 0:
+                names.append(z)
+            elif index == 1:
+                trigger.append(z)
+            else:
+                pass
+    global finaldict
+    finaldict = dict(zip(names, trigger))
 
-
-    """print("#number")
-    print(a[j-1::])"""
-    numbers.append(a[j-1::])
-
-    """print("#part not used in the string part")
-    print(a[j-2::1])
-    print("@!")
-    print(a[0:j-2])"""
-    names.append(a[0:j-2])
-
-    j=-1
-
-finaldict=dict(zip(names,numbers))
+strfilter(strv)
 print(finaldict)
-#test final
-
