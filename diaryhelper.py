@@ -15,7 +15,7 @@ def mainbody():
     print("[3] UPDATE AND EXIT")
     print("---")
 
-    # this is a trigger for the answer() since is
+    # this is a trigger for the answer() since it falls in else:
     x=55
 
     def answer(a):
