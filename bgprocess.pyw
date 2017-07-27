@@ -3,9 +3,7 @@ import datetime
 import time
 import os
 import threading
-now=""
-snow=""
-timev=""
+
 strv=""
 # Pulls data out of data.csv
 def r():
@@ -38,48 +36,23 @@ def strfilter(a):
 
 strfilter(strv)
 
+def delay(a):
+    time.sleep(a)
 
 def main2():
+     #  Always rechecks time ...
+     while True:
+         for names in finaldict:
+             triggers = finaldict[names]
+             print(names, finaldict[names])
 
-    def delay(a):
-        time.sleep(a)
+             global now, snow
+             now = datetime.datetime.now()
+             snow = now.strftime("%S")
+             snow = int(snow)
+             delay(0.2)
+             print(snow)
 
-    def timef():
-        #  Always rechecks time ...
-        while True:
-            global now, snow
-            now = datetime.datetime.now()
-            snow = now.strftime("%S")
-            snow = int(snow)
-            delay(0.2)
-            print(snow)
-
-
-    def trigger():
-
-        # if the timev, timev format, variable is equal to the trigger variable then
-        # it will check -r in the triggers list to see if timev == triggers
-        global now, snow, timev
-        print(snow)
-        timev = snow+3
-        print("init snow is ", snow)
-        print("timev is ", timev)
-
-        # Main2 loop
-        while True:
-
-            for names in finaldict:
-                triggers = finaldict[names]
-                triggers = int(triggers)
-
-                if int(triggers) == int(timev):
-                    print("start warn.py")
-        #             exec warn.py
-
-
-    s_thread = threading.Thread(target=timef, name="Second Thread / ##")
-    # START TRIGGER()
-    s_thread.start()
-    trigger()
-
+             if int(triggers) == snow:
+                 print(triggers)
 main2()
