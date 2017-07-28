@@ -4,10 +4,17 @@
 # q={'what did you eat today?': '21', 'what time did you get up?': '15', 'what did you do today?': '22'}
 
 # normal q
-q={}
+# q = {}
+q = {'janta': '21', 'almoco': '14', 'geral': '22'}
+
 localq = q
+
+
+
+
+
 def mainbody():
-                #READ DIARY FILE
+    # READ DIARY FILE
     print("     MENU")
     print("---")
     print("[1] ADD QUESTIONS")
@@ -16,7 +23,8 @@ def mainbody():
     print("---")
 
     # this is a trigger for the answer() since it falls in else:
-    x=55
+    x = 55
+
 
     def answer(a):
         a = int(input("Choose: "))
@@ -27,21 +35,32 @@ def mainbody():
             def addq():
                 print('CURRENT QUESTIONS')
 
-
                 print("")
                 print("ADD NEW")
 
                 qname = input("QUESTION NAME: ")
-                print(qname)
+                # print(qname)
+                print("")
+                trigger = input("TRIGGER TIME: ")
+                # print(trigger)
 
-                trigger= input("TRIGGER TIME: ")
-                print(trigger)
+                # Trigger verification for repetition
+                def trigger_veri(a):
+                    for i in q:
+                        print(i, q[i])
+                        if a == q[i]:
+                            print("TRIGGER IS :", a, "AND IS EQUAL TO ", q[i], "OF ", i)
+                            print("TRY ANOTHER TRIGGER TIME")
+                            print("")
+                            addq()
+                        else:
+                            pass
+                trigger_veri(trigger)
 
                 if trigger.isdigit() == False:
                     print("TRIGGER NOT AN INTEGER")
                     print("")
                     addq()
-
                 else:
                     if int(trigger) < 1 or int(trigger) > 24:
                         print("TRIGGER SHOULD BE 1 TO 24")
@@ -59,7 +78,7 @@ def mainbody():
                 if more.isdigit() == False:
                     print("NOT AN INTEGER SHOULD BE 1 OR 0")
                     print("")
-                    more=""
+                    more = ""
                     addq()
                 else:
                     pass
@@ -68,10 +87,10 @@ def mainbody():
 
                 # Essa solução não parece ser boa, mas é um jeito de acessar a q local do addq
                 # e usar ela em uma var global localq, a sintaze tbm ta confusa...
-                 
-                # o problema aqui é que eu tenho que citar localq =q aqui e 
-                # no inicio do programa, pra poder executar o elif == 3 
-                
+
+                # o problema aqui é que eu tenho que citar localq =q aqui e
+                # no inicio do programa, pra poder executar o elif == 3
+
                 global localq
                 localq = q
 
@@ -86,7 +105,7 @@ def mainbody():
         elif a == 2:
 
             def rmq():
-                if localq=={}:
+                if localq == {}:
                     print("NO QUESTIONS ... ")
                     mainbody()
                 else:
@@ -94,29 +113,30 @@ def mainbody():
 
                 print("WICH QUESTIONS YOU WANT TO REMOVE?")
                 i = 0
-                ll=[]
+                ll = []
                 # print(localq)
                 for a in localq:
-                    i=i+1
-                    print(i,".", a, ":", localq[a], "HOURS")
+                    i = i + 1
+                    print(i, ".", a, ":", localq[a], "HOURS")
                     ll.append(a)
                     ####
                 print("")
                 rname = input("CHOSE A NUMBER:  ")
                 rname = int(rname)
                 rname = rname - 1
-                ff=str(ll[rname])
+                ff = str(ll[rname])
                 del localq[ff]
                 del ll[rname]
                 print(ll)
 
                 mainbody()
+
             rmq()
         elif a == 3:
 
             def w(val):
                 with open("data.csv", "w") as f:
-                    #f.write(str(print(a, localq[a])))
+                    # f.write(str(print(a, localq[a])))
                     print("CURRENT CONFIG FILE:")
                     print(localq)
                     print("")
@@ -133,14 +153,13 @@ def mainbody():
         # This is answer filter...
         else:
             print("Choose a number between 1 and 3")
-            #repeat
+            # repeat
             answer(a)
-
 
     answer(x)
 
-if __name__ == '__main__':
 
+if __name__ == '__main__':
     mainbody()
 
 print("EXIT")
