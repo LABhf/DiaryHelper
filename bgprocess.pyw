@@ -1,4 +1,3 @@
-
 import datetime
 import time
 import os
@@ -36,23 +35,61 @@ def strfilter(a):
 
 strfilter(strv)
 
+# ################################################
+
 def delay(a):
     time.sleep(a)
 
+def warnf(a, b):
+        # 'a' is a_trigger and 'b' is a_name
+        print("warnf was exectd")
+        print(finaldict)
+        print("trigger is ", a, "its name is ", b, "time of warnf, eq = snow +1 ", snow)
+
+
+
+#     compare the timev with the trigger list from finaldict
+# after that it couldse if thw timev is changed if it is exec warn.py
+
+
+#     marks a second data.csv file execs the warn.py and
+def time_update():
+    global now, snow
+    now = datetime.datetime.now()
+    snow = now.strftime("%S")
+    snow = int(snow)
+
 def main2():
+
      #  Always rechecks time ...
      while True:
-         for names in finaldict:
-             triggers = finaldict[names]
-             print(names, finaldict[names])
+         for a_name in finaldict:
+             a_trigger = finaldict[a_name]
+             a_trigger = int(a_trigger)
+             # triggers separation
 
-             global now, snow
-             now = datetime.datetime.now()
-             snow = now.strftime("%S")
-             snow = int(snow)
-             delay(0.2)
+             # time variables statements of time_update function
+             time_update()
+
+
+             # faster delay to see repetition of if == warn loop
+             delay(0.02)
+             # time debug
+
              print(snow)
 
-             if int(triggers) == snow:
-                 print(triggers)
+             # a_trigger and time verification
+             if (int(a_trigger)-1) == snow:
+                 time_update()
+
+                 while (int(a_trigger)-1) == snow:
+                     time_update()
+                     # print("first block, ==", snow)
+
+                     if (int(a_trigger)-1) !=snow:
+                         time_update()
+                         print("Second block !=", "START WARNF()")
+                         warnf(a_trigger, a_name)
+                         print("close != loop")
+
 main2()
