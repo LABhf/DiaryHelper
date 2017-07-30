@@ -3,6 +3,8 @@
 #it should open a prompt ask the question, retrieve info and add it to the major diary.txt file.
 #And then clean the datatemp file
 import os
+import datetime
+import time
 strv=""
 # debug strv
 strv= "almoco"
@@ -26,7 +28,7 @@ def mainbody():
    
     print("")
     print("DIARYHELPER MENU")
-    print("     QUESTION IS:", strv)
+    # print("     QUESTION IS:", strv)
     print("[1] ANSWER QUESTION:")
     print("[2] EXIT WITHOUT ANSWERING")
     # a() is the answer
@@ -40,17 +42,46 @@ def mainbody():
             print("numbers only")
             a()
 
-        if ma == 1:
-                print("#1")
-        #        -w to diary file
+        def z1():
 
+            if ma == 1:
+                print("     QUESTION IS:", strv)
+                answer = input(": ")
+                print(answer, "' ok? , [1] yes, [0] No")
+                try:
+                    # ma = menu answer1
 
-        elif ma == 2:
-                print("#2")
-                pass
-        else:
-            print("SHOULD BE 1 OR 2")
-            a()
+                    afs = input(": ")
+                    afs = int(afs)
+                    b = afs - 1
+                except:
+                    print("numbers only")
+                    z1()
+
+                if afs == 1:
+                    print("#1")
+                    now = datetime.datetime.now()
+                    snow = now.strftime("%x")
+                    f = open("diary.txt","a") #opens file with name of "test.txt"
+                    
+                    f.write(str(snow)+":"+"   "+"question:  "+strv+": "+'\n')
+                    f.write(str(answer)+'\n')
+
+                    f.close()
+                elif afs == 0:
+                    print("#0")
+                    print("")
+                    print("")
+                    mainbody()
+                print("##F")
+
+            elif ma == 2:
+                    print("#2")
+                    pass
+            else:
+                print("SHOULD BE 1 OR 2")
+                a()
+        z1()
     a()
 
 
