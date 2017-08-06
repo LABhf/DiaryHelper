@@ -1,16 +1,16 @@
 # diaryhelper asks questions about your day in a regular interval so that you don't forget about writing your diary
 
-# debuging q
-# q={'what did you eat today?': '21', 'what time did you get up?': '15', 'what did you do today?': '22'}
-
-# normal q
-# q = {}
-q = {'janta': '21', 'almoco': '14', 'geral': '22'}
-
+q = {}
 localq = q
 
+def debug():
+    global q, localq
+    q={'what did you eat today?': '21', 'what time did you get up?': '15', 'what did you do today?': '22'}
+    localq = q
+    print(q)
 
-
+# call debug if you need to test it
+# debug()
 
 
 def mainbody():
@@ -25,7 +25,6 @@ def mainbody():
     # this is a trigger for the answer() since it falls in else:
     x = 55
 
-
     def answer(a):
         a = int(input("Choose: "))
 
@@ -39,28 +38,16 @@ def mainbody():
                 print("ADD NEW")
 
                 qname = input("QUESTION NAME: ")
-                # print(qname)
-                print("")
-                trigger = input("TRIGGER TIME: ")
-                # print(trigger)
+                print(qname)
 
-                # Trigger verification for repetition
-                def trigger_veri(a):
-                    for i in q:
-                        print(i, q[i])
-                        if a == q[i]:
-                            print("TRIGGER IS :", a, "AND IS EQUAL TO ", q[i], "OF ", i)
-                            print("TRY ANOTHER TRIGGER TIME")
-                            print("")
-                            addq()
-                        else:
-                            pass
-                trigger_veri(trigger)
+                trigger = input("TRIGGER TIME: ")
+                print(trigger)
 
                 if trigger.isdigit() == False:
                     print("TRIGGER NOT AN INTEGER")
                     print("")
                     addq()
+
                 else:
                     if int(trigger) < 1 or int(trigger) > 24:
                         print("TRIGGER SHOULD BE 1 TO 24")
